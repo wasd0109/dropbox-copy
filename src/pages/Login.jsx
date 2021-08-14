@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+// import AuthForm from "../components/AuthForm";
 
 function Login() {
-  return <Link to="/register">To register</Link>;
+  return <div></div>;
 }
 
 export default Login;
