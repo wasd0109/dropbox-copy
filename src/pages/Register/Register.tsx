@@ -92,7 +92,7 @@ function AuthForm() {
           </div>
         )}
 
-        <div className="flex justify-center flex-col mt-2">
+        <div className="flex justify-center flex-col mt-4">
           {loading ? (
             <ReactLoading
               type="spin"
@@ -106,18 +106,18 @@ function AuthForm() {
               type="submit"
               aria-label="Register"
               value="Register"
-              className="bg-blue-500 hover:bg-blue-700 cursor-pointer  text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 cursor-pointer  text-white text-xl font-bold py-2 px-4 rounded self-center"
             />
           )}
           <Link
             to="/login"
             aria-label="To Login Page"
-            className="self-end text-blue-500 hover:text-blue-700 cursor-pointer font-bold mt-4"
+            className="self-end text-blue-500 hover:text-blue-700 cursor-pointer text-xl font-bold mt-2 mr-4"
           >
             Login
           </Link>
         </div>
-        <div className="self-center mt-2">
+        <div className=" self-center mt-2">
           {registerError ? <ErrorBar message={registerError} /> : null}
         </div>
       </form>
