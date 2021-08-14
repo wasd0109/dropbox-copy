@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { LoginFormData, LoginFormError } from "./LoginType";
-import ReactLoading from "react-loading";
 import emailRegex from "../../validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Spinner } from "react-bootstrap";
 
 import * as styles from "./Login.module.css";
 
@@ -90,7 +89,7 @@ function Login() {
         ) : null}
         <div className={styles.buttons}>
           <Button variant="primary" onClick={handleSubmit}>
-            {loading ? <ReactLoading type="spin" /> : "Login"}
+            {loading ? <Spinner animation="border" /> : "Login"}
           </Button>
           <Button variant="link">
             <Link to="/register">Register</Link>

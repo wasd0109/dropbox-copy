@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Form, Alert, Button } from "react-bootstrap";
+import { Form, Alert, Button, Spinner } from "react-bootstrap";
 import { RegisterFormData, RegisterFormError } from "./RegisterType";
-import ReactLoading from "react-loading";
-import emailRegex from "../../validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
 import * as styles from "./Register.module.css";
@@ -99,7 +97,7 @@ function Register() {
         ) : null}
         <div className={styles.buttons}>
           <Button variant="primary" onClick={handleSubmit}>
-            {loading ? <ReactLoading type="spin" /> : "Register"}
+            {loading ? <Spinner animation="border" /> : "Register"}
           </Button>
           <Button variant="link">
             <Link to="/">Login</Link>

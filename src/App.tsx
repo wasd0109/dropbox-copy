@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import UserNameModal from "./components/UserNameModal";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Register from "./pages/Register";
 import { auth } from "./utils/fbInit";
-import ReactLoading from "react-loading";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -27,13 +27,14 @@ function App() {
   });
   if (loading) {
     return (
-      <div className="h-screen flex justify-center items-center">
-        <ReactLoading
-          type="spin"
-          height={"50%"}
-          width={"50%"}
-          color="#4299e1"
-        />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Spinner animation="border" style={{ height: "40vh", width: "40vh" }} />
       </div>
     );
   }
@@ -47,7 +48,6 @@ function App() {
                 showUserNameModal={showUserNameModal}
                 setShowUserNameModal={setShowUserNameModal}
               />
-
               <Main />
             </Route>
           </Switch>
