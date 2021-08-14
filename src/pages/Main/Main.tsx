@@ -1,14 +1,11 @@
 import React from "react";
 import { auth } from "../../utils/fbInit";
+import Navbar from "../../components/Navbar";
 
 function Main() {
-  const onLogout = () => {
-    auth.signOut();
-  };
   return (
     <div className="h-screen">
-      Main
-      <button onClick={onLogout}>Logout</button>
+      <Navbar />
     </div>
   );
 }
