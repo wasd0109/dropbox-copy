@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { LoginFormData } from "./LoginType";
 import ErrorBar from "../../components/ErrorBar";
 import ReactLoading from "react-loading";
-import emailRegex from "../../components/validators/isEmail";
+import emailRegex from "../../validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
 
