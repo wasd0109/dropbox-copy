@@ -7,6 +7,8 @@ import Register from "./pages/Register";
 import { auth } from "./utils/fbInit";
 import ReactLoading from "react-loading";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function App() {
   const [user, setUser] = useState<firebase.default.User | null>(null);
   const [showUserNameModal, setShowUserNameModal] = useState(false);

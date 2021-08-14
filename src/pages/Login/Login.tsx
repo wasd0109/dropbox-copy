@@ -1,28 +1,43 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { LoginFormData } from "./LoginType";
-import ErrorBar from "../../components/ErrorBar";
+import { LoginFormData, LoginFormError } from "./LoginType";
 import ReactLoading from "react-loading";
 import emailRegex from "../../validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
+import { Form, Button, Alert } from "react-bootstrap";
+
+import * as styles from "./Login.module.css";
 
 function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormData>();
-
+  const [form, setForm] = useState({} as LoginFormData);
   const [loading, setLoading] = useState(false);
-  const [registerError, setLoginError] = useState("");
+  const [errors, setErrors] = useState<LoginFormError>({} as LoginFormError);
+  const setField = (field: string, value: string) => {
+    setForm({
+      ...form,
+      [field]: value,
+    });
+  };
 
-  const onSubmit = async (data: LoginFormData) => {
-    setLoading(true);
-    setLoginError("");
-    const { email, password } = data;
+  const findFormErrors = () => {
+    const { email, password } = form;
+    const newErrors = {} as LoginFormError;
+    if (!email || email === "") newErrors.email = "Required";
+    else if (!emailRegex.test(email))
+      newErrors.email = "Please enter valid email";
+    if (!password || password === "") newErrors.password = "Required";
+    return newErrors;
+  };
+  console.log(errors);
+  const handleSubmit = async () => {
+    const newErrors = findFormErrors();
+    if (Object.keys(newErrors).length > 0) {
+      // We got errors!
+      return setErrors(newErrors);
+    }
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await auth.signInWithEmailAndPassword(form.email, form.password);
     } catch (err) {
       const authError = err as firebase.default.auth.Error;
       const ambiguousError =
@@ -30,86 +45,53 @@ function Login() {
         authError.code === "auth/wrong-password"
           ? "Invalid email or password"
           : "";
-      setLoading(false);
-      setLoginError(ambiguousError || "Something went wrong");
+      setErrors({
+        ...errors,
+        server: ambiguousError || "Something went wrong",
+      });
     }
   };
 
   return (
-    <div className="grid h-screen auto-rows-auto grid-cols-1 gap-x-2">
-      <form
-        className="row-start-2 row-end-4 col-span-full flex flex-col shadow-md items-stretch py-4 px-4 mx-2 "
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label className="flex flex-col">
-          Email
-          <input
+    <div className={styles.container}>
+      <Form className={styles.form}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            size="lg"
+            required
             type="email"
-            className="border-2 mt-1"
-            {...register("email", {
-              required: "Required",
-              pattern: {
-                value: emailRegex,
-                message: "Please enter a valid email",
-              },
-            })}
+            onChange={(e) => setField("email", e.target.value)}
+            placeholder="Enter email"
+            isInvalid={!!errors.email}
           />
-        </label>
-        {errors.email?.message && (
-          <div className="mt-2">
-            <ErrorBar message={errors.email.message} />
-          </div>
-        )}
+          <Form.Control.Feedback>{errors.email}</Form.Control.Feedback>
+        </Form.Group>
 
-        <label className="flex flex-col mt-4">
-          Password
-          <input
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            size="lg"
             type="password"
-            className="border-2 mt-1"
-            {...register("password", {
-              required: "Required",
-              minLength: {
-                value: 6,
-                message: "Password must be longer than 6 characters",
-              },
-            })}
+            onChange={(e) => setField("password", e.target.value)}
+            placeholder="Password"
+            isInvalid={!!errors.password}
           />
-        </label>
-        {errors.password?.message && (
-          <div className="mt-2">
-            <ErrorBar message={errors.password.message} />
-          </div>
-        )}
-
-        <div className="flex justify-center flex-col mt-4">
-          {loading ? (
-            <ReactLoading
-              type="spin"
-              color="#4299e1"
-              className="self-center"
-              width="2rem"
-              height="2rem"
-            />
-          ) : (
-            <input
-              type="submit"
-              aria-label="Login"
-              value="Login"
-              className="bg-blue-500 hover:bg-blue-700 cursor-pointer  text-white text-xl font-bold py-2 px-4 rounded self-center"
-            />
-          )}
-          <Link
-            to="/register"
-            aria-label="To Login Page"
-            className="self-end text-blue-500 hover:text-blue-700 cursor-pointer text-xl font-bold mt-2 mr-4"
-          >
-            Register
-          </Link>
+        </Form.Group>
+        {errors.server ? (
+          <Alert variant="danger" className={styles.error}>
+            {errors.server}
+          </Alert>
+        ) : null}
+        <div className={styles.buttons}>
+          <Button variant="primary" onClick={handleSubmit}>
+            {loading ? <ReactLoading type="spin" /> : "Login"}
+          </Button>
+          <Button variant="link">
+            <Link to="/register">Register</Link>
+          </Button>
         </div>
-        <div className=" self-center mt-2">
-          {registerError ? <ErrorBar message={registerError} /> : null}
-        </div>
-      </form>
+      </Form>
     </div>
   );
 }
