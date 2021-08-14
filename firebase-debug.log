@@ -1,38 +1,129 @@
-[debug] [2021-08-11T10:53:00.903Z] ----------------------------------------------------------------------
-[debug] [2021-08-11T10:53:00.905Z] Command:       /Users/ken/.nvm/versions/node/v16.5.0/bin/node /Users/ken/.yarn/bin/firebase emulators:start
-[debug] [2021-08-11T10:53:00.905Z] CLI Version:   9.16.0
-[debug] [2021-08-11T10:53:00.905Z] Platform:      darwin
-[debug] [2021-08-11T10:53:00.905Z] Node Version:  v16.5.0
-[debug] [2021-08-11T10:53:00.906Z] Time:          Wed Aug 11 2021 19:53:00 GMT+0900 (Japan Standard Time)
-[debug] [2021-08-11T10:53:00.906Z] ----------------------------------------------------------------------
+[debug] [2021-08-12T11:27:26.935Z] ----------------------------------------------------------------------
+[debug] [2021-08-12T11:27:26.936Z] Command:       /Users/ken/.nvm/versions/node/v16.5.0/bin/node /Users/ken/.yarn/bin/firebase emulators:start
+[debug] [2021-08-12T11:27:26.936Z] CLI Version:   9.16.0
+[debug] [2021-08-12T11:27:26.936Z] Platform:      darwin
+[debug] [2021-08-12T11:27:26.936Z] Node Version:  v16.5.0
+[debug] [2021-08-12T11:27:26.937Z] Time:          Thu Aug 12 2021 20:27:26 GMT+0900 (Japan Standard Time)
+[debug] [2021-08-12T11:27:26.937Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2021-08-11T10:53:00.930Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2021-08-11T10:53:00.930Z] > authorizing via signed-in user (wasd0109.dev@gmail.com)
+[debug] [2021-08-12T11:27:26.962Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-08-12T11:27:26.962Z] > authorizing via signed-in user (wasd0109.dev@gmail.com)
 [info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
-[debug] [2021-08-11T10:53:00.938Z] [hub] writing locator at /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/hub-dropbox-copy.json
-[debug] [2021-08-11T10:53:00.948Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2021-08-11T10:53:00.948Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2021-08-11T10:53:00.948Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/ken/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar","--host","localhost","--port",8080,"--rules","/Users/ken/Documents/Programming/dropbox-copy/firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/ken/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"/Users/ken/Documents/Programming/dropbox-copy/firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[debug] [2021-08-12T11:27:26.970Z] [hub] writing locator at /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/hub-dropbox-copy.json
+[debug] [2021-08-12T11:27:26.993Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-08-12T11:27:26.994Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-08-12T11:27:26.994Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/ken/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar","--host","localhost","--port",8080,"--rules","/Users/ken/Documents/Programming/dropbox-copy/firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/ken/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"/Users/ken/Documents/Programming/dropbox-copy/firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
-[debug] [2021-08-11T10:53:01.440Z] Aug 11, 2021 7:53:01 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
-INFO: Started WebSocket server on ws://localhost:49708
- {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 11, 2021 7:53:01 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:49708\n"}}
-[debug] [2021-08-11T10:53:01.449Z] API endpoint: http://localhost:8080
- {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost:8080\n"}}
-[debug] [2021-08-11T10:53:01.449Z] If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+[debug] [2021-08-12T11:27:27.696Z] Aug 12, 2021 8:27:27 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:63359
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 12, 2021 8:27:27 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:63359\n"}}
+[debug] [2021-08-12T11:27:27.706Z] API endpoint: http://localhost:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost: {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:"}}
+[debug] [2021-08-12T11:27:27.706Z] 8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"8080\n\nDev App Server is now running.\n\n"}}
+[debug] [2021-08-12T11:27:28.602Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-08-12T11:27:28.716Z] Temp file directory for storage emulator: /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/firebase/storage/blobs"}}
+[debug] [2021-08-12T11:27:29.282Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-08-12T11:27:29.282Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-08-12T11:27:29.282Z] Starting Emulator UI with command {"binary":"node","args":["/Users/ken/.cache/firebase/emulators/ui-v1.6.0/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/ken/.cache/firebase/emulators/ui-v1.6.0/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-08-12T11:27:29.359Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ localhost:9099 │ http://localhost:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ localhost:8080 │ http://localhost:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ localhost:9199 │ http://localhost:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2021-08-12T12:32:55.281Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[debug] [2021-08-12T12:32:55.290Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:780:11)
+    at WriteStream.Socket._write (node:net:792:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/ken/.config/yarn/global/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/ken/.config/yarn/global/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/ken/.config/yarn/global/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/Users/ken/.config/yarn/global/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at Console.Writable.write (/Users/ken/.config/yarn/global/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/Users/ken/.config/yarn/global/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (node:events:406:35)
+    at DerivedLogger.emit (node:domain:470:12)
+    at addChunk (/Users/ken/.config/yarn/global/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[debug] [2021-08-12T12:32:55.292Z] Ignoring signal SIGHUP due to short delay of 12ms
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2021-08-12T12:32:55.302Z] *** shutting down gRPC server since JVM is shutting down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n"}}
+[debug] [2021-08-12T12:32:55.320Z] *** server shut down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down\n"}}
+[debug] [2021-08-14T06:34:15.678Z] ----------------------------------------------------------------------
+[debug] [2021-08-14T06:34:15.679Z] Command:       /Users/ken/.nvm/versions/node/v16.5.0/bin/node /Users/ken/.yarn/bin/firebase emulators:start
+[debug] [2021-08-14T06:34:15.679Z] CLI Version:   9.16.0
+[debug] [2021-08-14T06:34:15.679Z] Platform:      darwin
+[debug] [2021-08-14T06:34:15.679Z] Node Version:  v16.5.0
+[debug] [2021-08-14T06:34:15.681Z] Time:          Sat Aug 14 2021 15:34:15 GMT+0900 (Japan Standard Time)
+[debug] [2021-08-14T06:34:15.681Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-08-14T06:34:15.682Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-08-14T06:34:15.716Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-08-14T06:34:15.716Z] > authorizing via signed-in user (wasd0109.dev@gmail.com)
+[info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
+[debug] [2021-08-14T06:34:15.722Z] [hub] writing locator at /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/hub-dropbox-copy.json
+[debug] [2021-08-14T06:34:15.748Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-08-14T06:34:15.748Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-08-14T06:34:15.748Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/ken/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar","--host","localhost","--port",8080,"--rules","/Users/ken/Documents/Programming/dropbox-copy/firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/ken/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"/Users/ken/Documents/Programming/dropbox-copy/firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2021-08-14T06:34:16.197Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-08-14T06:34:16.197Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2021-08-14T06:34:16.564Z] Aug 14, 2021 3:34:16 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:55073
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 14, 2021 3:34:16 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:55073\n"}}
+[debug] [2021-08-14T06:34:16.576Z] API endpoint: http://localhost {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost"}}
+[debug] [2021-08-14T06:34:16.576Z] :8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
 
    export FIRESTORE_EMULATOR_HOST=localhost:8080
 
 Dev App Server is now running.
 
- {"metadata":{"emulator":{"name":"firestore"},"message":"If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8080\n\nDev App Server is now running.\n\n"}}
-[debug] [2021-08-11T10:53:02.283Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2021-08-11T10:53:02.386Z] Temp file directory for storage emulator: /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/firebase/storage/blobs"}}
-[debug] [2021-08-11T10:53:02.913Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2021-08-11T10:53:02.913Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2021-08-11T10:53:02.914Z] Starting Emulator UI with command {"binary":"node","args":["/Users/ken/.cache/firebase/emulators/ui-v1.6.0/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/ken/.cache/firebase/emulators/ui-v1.6.0/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+ {"metadata":{"emulator":{"name":"firestore"},"message":":8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8080\n\nDev App Server is now running.\n\n"}}
+[debug] [2021-08-14T06:34:17.931Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-08-14T06:34:18.066Z] Temp file directory for storage emulator: /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/24/pgwy7kkx2s5435d4b99rmz2m0000gn/T/firebase/storage/blobs"}}
+[debug] [2021-08-14T06:34:18.689Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-08-14T06:34:18.689Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-08-14T06:34:18.689Z] Starting Emulator UI with command {"binary":"node","args":["/Users/ken/.cache/firebase/emulators/ui-v1.6.0/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/ken/.cache/firebase/emulators/ui-v1.6.0/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2021-08-11T10:53:02.992Z] Web / API server started at localhost:4000
+[debug] [2021-08-14T06:34:18.745Z] Web / API server started at localhost:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
