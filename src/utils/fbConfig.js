@@ -1,6 +1,5 @@
-require("dotenv").config();
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyCP4G9Y7gtFFloASOusc8qzi9ws_nzmMa0",
 
   authDomain: "dropbox-copy.firebaseapp.com",
 
