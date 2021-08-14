@@ -48,7 +48,7 @@ function App() {
                 showUserNameModal={showUserNameModal}
                 setShowUserNameModal={setShowUserNameModal}
               />
-              <Main />
+              <Main user={user} />
             </Route>
           </Switch>
         ) : (
