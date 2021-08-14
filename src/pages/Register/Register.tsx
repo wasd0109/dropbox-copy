@@ -7,7 +7,7 @@ import emailRegex from "../../components/validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
 
-function AuthForm() {
+function Register() {
   const {
     register,
     handleSubmit,
@@ -125,4 +125,4 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export default Register;
