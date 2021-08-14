@@ -65,7 +65,9 @@ function Login() {
             placeholder="Enter email"
             isInvalid={!!errors.email}
           />
-          <Form.Control.Feedback>{errors.email}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            {errors.email}
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
