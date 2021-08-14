@@ -43,9 +43,11 @@ function App() {
         {user ? (
           <Switch>
             <Route path="/">
-              {showUserNameModal ? (
-                <UserNameModal setShowUserNameModal={setShowUserNameModal} />
-              ) : null}
+              <UserNameModal
+                showUserNameModal={showUserNameModal}
+                setShowUserNameModal={setShowUserNameModal}
+              />
+
               <Main />
             </Route>
           </Switch>

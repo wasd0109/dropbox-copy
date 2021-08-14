@@ -1,47 +1,65 @@
 import React, { useState } from "react";
-import { UserNameModalProps } from "./UserNameModalType";
+import { UserNameModalErrors, UserNameModalProps } from "./UserNameModalType";
 import { auth, db } from "../../utils/fbInit";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
+import * as styles from "./UserNameModal.module.css";
 
-function UserNameModal({ setShowUserNameModal }: UserNameModalProps) {
+function UserNameModal({
+  showUserNameModal,
+  setShowUserNameModal,
+}: UserNameModalProps) {
   const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
-  const onSubmit = async (username: string) => {
+  const [errors, setErrors] = useState({} as UserNameModalErrors);
+
+  const handleSubmit = async () => {
+    setErrors({} as UserNameModalErrors);
+    if (!username || username === "")
+      return setErrors({ ...errors, username: "Please enter your name" });
     const userId = auth.currentUser?.uid;
     try {
       const userRef = await db.collection("users").doc(userId);
       if ((await userRef.get()).exists) {
-        return setError("User already exist");
+        return setErrors({ ...errors, server: "User already exist" });
       }
-      const result = await auth.currentUser?.updateProfile({
+      await auth.currentUser?.updateProfile({
         displayName: username,
       });
       await userRef.set({ userId, username: auth.currentUser?.displayName });
       setShowUserNameModal(false);
     } catch (err) {
-      setError("Something wrong happened");
+      setErrors({ ...errors, server: "Something went wrong" });
     }
   };
+
   return (
-    <div className="z-10 h-full w-full fixed bg-opacity-50 bg-black">
-      <div className="relative mx-10 -my-20 top-1/2 text-center bg-white p-4">
-        <label>
-          Please enter your name:
-          <input
+    <Modal show={showUserNameModal} centered>
+      <Modal.Header>
+        <Modal.Title>Please tell us your name before continuing</Modal.Title>
+      </Modal.Header>
+      <Form className={styles.form}>
+        <Form.Group className="mb-1" controlId="formBasicEmail">
+          <Form.Control
             type="text"
-            className="w-full border-2 mt-2"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            placeholder="Your name"
+            onChange={(e) => setUsername(e.target.value)}
+            isInvalid={!!errors.username}
           />
-        </label>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-          onClick={() => onSubmit(username)}
-        >
-          Submit
-        </button>
-        {error ? <div className="mt-2"></div> : null}
-      </div>
-    </div>
+          <Form.Control.Feedback type="invalid">
+            {errors.username}
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Form>
+      {errors.server ? (
+        <Alert className={styles.alert} variant="warning">
+          {errors.server}
+        </Alert>
+      ) : null}
+      <Modal.Footer>
+        <Button variant="primary" onClick={() => handleSubmit()}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 
