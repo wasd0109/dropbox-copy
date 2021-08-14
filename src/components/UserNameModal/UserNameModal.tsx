@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { UserNameModalProps } from "./UserNameModalType";
 import { auth, db } from "../../utils/fbInit";
-import ErrorBar from "../ErrorBar";
 
 function UserNameModal({ setShowUserNameModal }: UserNameModalProps) {
   const [username, setUsername] = useState("");
@@ -40,11 +39,7 @@ function UserNameModal({ setShowUserNameModal }: UserNameModalProps) {
         >
           Submit
         </button>
-        {error ? (
-          <div className="mt-2">
-            <ErrorBar message={error} />
-          </div>
-        ) : null}
+        {error ? <div className="mt-2"></div> : null}
       </div>
     </div>
   );

@@ -7,6 +7,6 @@ export type RegisterFormData = {
 export type RegisterFormError = {
   email: string;
   password: string;
-  agreeTerm: boolean;
+  agreeTerm: string;
   server: string;
 };

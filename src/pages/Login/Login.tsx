@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { LoginFormData, LoginFormError } from "./LoginType";
 import ReactLoading from "react-loading";
 import emailRegex from "../../validators/isEmail";
@@ -29,7 +28,7 @@ function Login() {
     if (!password || password === "") newErrors.password = "Required";
     return newErrors;
   };
-  console.log(errors);
+
   const handleSubmit = async () => {
     const newErrors = findFormErrors();
     if (Object.keys(newErrors).length > 0) {
@@ -39,6 +38,7 @@ function Login() {
     try {
       await auth.signInWithEmailAndPassword(form.email, form.password);
     } catch (err) {
+      setLoading(false);
       const authError = err as firebase.default.auth.Error;
       const ambiguousError =
         authError.code === "auth/user-not-found" ||
@@ -79,6 +79,9 @@ function Login() {
             placeholder="Password"
             isInvalid={!!errors.password}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.password}
+          </Form.Control.Feedback>
         </Form.Group>
         {errors.server ? (
           <Alert variant="danger" className={styles.error}>

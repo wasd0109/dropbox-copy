@@ -1,48 +1,42 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Form, Alert, Button } from "react-bootstrap";
 import { RegisterFormData, RegisterFormError } from "./RegisterType";
 import ReactLoading from "react-loading";
 import emailRegex from "../../validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
+import * as styles from "./Register.module.css";
+import findRegisterFormErrors from "./helper";
+
+const INITIAL_FORM_STATE = { agreeTerm: false } as RegisterFormData;
 
 function Register() {
-  const [form, setForm] = useState({} as RegisterFormData);
+  const [form, setForm] = useState(INITIAL_FORM_STATE);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<RegisterFormError>(
-    {} as RegisterFormError
-  );
-  const setField = (field: string, value: string) => {
+  const [errors, setErrors] = useState({} as RegisterFormError);
+
+  const setField = (field: string, value: string | boolean) => {
     setForm({
       ...form,
       [field]: value,
     });
   };
 
-  const findFormErrors = () => {
-    const { email, password } = form;
-    const newErrors = {} as LoginFormError;
-    if (!email || email === "") newErrors.email = "Required";
-    else if (!emailRegex.test(email))
-      newErrors.email = "Please enter valid email";
-    if (!password || password === "") newErrors.password = "Required";
-    return newErrors;
-  };
-  console.log(errors);
   const handleSubmit = async () => {
-    const newErrors = findFormErrors();
+    setErrors({} as RegisterFormError);
+    const newErrors = findRegisterFormErrors(form);
     if (Object.keys(newErrors).length > 0) {
       // We got errors!
       return setErrors(newErrors);
     }
     try {
-      await auth.signInWithEmailAndPassword(form.email, form.password);
+      await auth.createUserWithEmailAndPassword(form.email, form.password);
     } catch (err) {
+      setLoading(false);
       const authError = err as firebase.default.auth.Error;
       const ambiguousError =
-        authError.code === "auth/user-not-found" ||
-        authError.code === "auth/wrong-password"
-          ? "Invalid email or password"
+        authError.code === "auth/email-already-in-use"
+          ? "Email already in use"
           : "";
       setErrors({
         ...errors,
@@ -78,6 +72,25 @@ function Register() {
             placeholder="Password"
             isInvalid={!!errors.password}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.password}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group
+          className="mb-3"
+          controlId="formBasicCheckbox"
+          style={{ display: "flex" }}
+        >
+          <Form.Check
+            type="checkbox"
+            className={styles.checkbox}
+            onClick={() => setField("agreeTerm", !form.agreeTerm)}
+            isInvalid={!!errors.agreeTerm}
+          />
+          <Form.Label>Agree Term of Services</Form.Label>
+          <Form.Control.Feedback type="invalid">
+            {errors.agreeTerm}
+          </Form.Control.Feedback>
         </Form.Group>
         {errors.server ? (
           <Alert variant="danger" className={styles.error}>
@@ -86,10 +99,10 @@ function Register() {
         ) : null}
         <div className={styles.buttons}>
           <Button variant="primary" onClick={handleSubmit}>
-            {loading ? <ReactLoading type="spin" /> : "Login"}
+            {loading ? <ReactLoading type="spin" /> : "Register"}
           </Button>
           <Button variant="link">
-            <Link to="/register">Register</Link>
+            <Link to="/">Login</Link>
           </Button>
         </div>
       </Form>
