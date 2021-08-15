@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
-import { db, storage } from "../utils/fbInit";
+import { db, storage, auth } from "../utils/fbInit";
 
-type File = {
+export type File = {
   filename: string;
   userId: string;
   size: number;
   date: string;
 };
 
-const useStorageList = (uid: string, refresh: {}) => {
+const useStorageList = () => {
+  const uid = auth.currentUser?.uid;
   let [result, setResult] = useState<File[]>([]);
   let [loading, setLoading] = useState(true);
   useEffect(() => {
-    const getItemLists = async () => {
-      const temp = [] as File[];
-      const result = await db
-        .collection("files")
-        .where("userId", "==", uid)
-        .get();
-      result.docs.forEach((doc) => {
-        const data = doc.data() as File;
-        temp.push(data);
+    const listener = db
+      .collection("files")
+      .where("userId", "==", uid)
+      .onSnapshot((result) => {
+        const temp = [] as File[];
+        result.docs.forEach((doc) => {
+          const data = doc.data() as File;
+          temp.push(data);
+        });
+        console.log(temp);
+        setResult(temp);
       });
-      setResult(temp);
-    };
-    getItemLists();
+
     setLoading(false);
-  }, [uid, refresh]);
+    return listener;
+  }, [uid]);
   return { result, loading };
 };
 
