@@ -47,7 +47,7 @@ function Register() {
     <div className={styles.container}>
       <Form className={styles.form}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label className={styles.inputLabel}>Email address</Form.Label>
           <Form.Control
             size="lg"
             required
@@ -62,7 +62,7 @@ function Register() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className={styles.inputLabel}>Password</Form.Label>
           <Form.Control
             size="lg"
             type="password"
@@ -77,7 +77,7 @@ function Register() {
         <Form.Group
           className="mb-3"
           controlId="formBasicCheckbox"
-          style={{ display: "flex" }}
+          style={{ display: "flex", alignItems: "center" }}
         >
           <Form.Check
             type="checkbox"
@@ -85,7 +85,9 @@ function Register() {
             onClick={() => setField("agreeTerm", !form.agreeTerm)}
             isInvalid={!!errors.agreeTerm}
           />
-          <Form.Label>Agree Term of Services</Form.Label>
+          <Form.Label className={styles.checkboxLabel}>
+            Agree Term of Services
+          </Form.Label>
           <Form.Control.Feedback type="invalid">
             {errors.agreeTerm}
           </Form.Control.Feedback>

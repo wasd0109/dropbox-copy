@@ -3,7 +3,7 @@ import { LoginFormData, LoginFormError } from "./LoginType";
 import emailRegex from "../../validators/isEmail";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
-import { Form, Button, Alert, Spinner } from "react-bootstrap";
+import { Form, Button, Alert, Spinner, Container } from "react-bootstrap";
 
 import * as styles from "./Login.module.css";
 
@@ -52,12 +52,11 @@ function Login() {
   };
 
   return (
-    <div className={styles.container}>
+    <Container fluid className={styles.container}>
       <Form className={styles.form}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label className={styles.inputLabel}>Email address</Form.Label>
           <Form.Control
-            size="lg"
             required
             type="email"
             onChange={(e) => setField("email", e.target.value)}
@@ -70,9 +69,8 @@ function Login() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className={styles.inputLabel}>Password</Form.Label>
           <Form.Control
-            size="lg"
             type="password"
             onChange={(e) => setField("password", e.target.value)}
             placeholder="Password"
@@ -96,7 +94,7 @@ function Login() {
           </Button>
         </div>
       </Form>
-    </div>
+    </Container>
   );
 }
 

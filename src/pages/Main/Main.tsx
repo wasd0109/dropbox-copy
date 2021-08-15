@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import * as styles from "./Main.module.css";
 import { Button, Container, Modal } from "react-bootstrap";
-import { storage } from "../../utils/fbInit";
+import { storage, db } from "../../utils/fbInit";
 import { MainProps } from "./MainType";
 import useStorageList from "../../hooks/useStorageLsit";
 import { result } from "lodash";

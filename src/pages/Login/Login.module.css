@@ -1,22 +1,40 @@
 .container {
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .form {
-  padding: 2rem 4rem;
-
+  width: 80vw;
+  padding: 4rem 4rem;
   --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+input {
+  font-size: 2em !important;
+}
+
+.inputLabel {
+  font-size: 4rem;
+}
+
 .buttons {
+  margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+}
+
+.buttons > button {
+  font-size: 2.5rem;
+  padding: 0.5rem 2rem;
 }
 .error {
   margin-top: 1rem;
