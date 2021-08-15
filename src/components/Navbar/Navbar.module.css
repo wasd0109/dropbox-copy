@@ -2,7 +2,21 @@
   text-decoration: none;
   color: black;
   margin-bottom: 0;
+  font-size: 2rem;
 }
 .link:hover {
   opacity: 0.6;
+}
+
+.siteTitle {
+  font-size: 3rem;
+}
+
+.navbar {
+  padding: 0 1rem;
+}
+
+.navbarToggle {
+  font-size: 2rem;
+  margin: 1rem;
 }

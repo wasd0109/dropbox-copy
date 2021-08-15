@@ -14,28 +14,31 @@ function Navbar() {
     auth.signOut();
   };
   return (
-    <BootstrapNavbar bg="light" expand="lg">
-      <Container>
-        <BootstrapNavbar.Brand>Dropbox Copy</BootstrapNavbar.Brand>
-        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
-        <BootstrapNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as="li">
-              <Link to="/" className={styles.link}>
-                Home
-              </Link>
-            </Nav.Link>
-            <Nav.Link as="li">
-              <Link to="/setting" className={styles.link}>
-                Setting
-              </Link>
-            </Nav.Link>
-            <Nav.Link onClick={logout}>
-              <p className={styles.link}>Logout</p>
-            </Nav.Link>
-          </Nav>
-        </BootstrapNavbar.Collapse>
-      </Container>
+    <BootstrapNavbar bg="light" expand="lg" className={styles.navbar}>
+      <BootstrapNavbar.Brand className={styles.siteTitle}>
+        Dropbox Copy
+      </BootstrapNavbar.Brand>
+      <BootstrapNavbar.Toggle
+        aria-controls="basic-navbar-nav"
+        className={styles.navbarToggle}
+      />
+      <BootstrapNavbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link as="li">
+            <Link to="/" className={styles.link}>
+              Home
+            </Link>
+          </Nav.Link>
+          <Nav.Link as="li">
+            <Link to="/setting" className={styles.link}>
+              Setting
+            </Link>
+          </Nav.Link>
+          <Nav.Link onClick={logout}>
+            <p className={styles.link}>Logout</p>
+          </Nav.Link>
+        </Nav>
+      </BootstrapNavbar.Collapse>
     </BootstrapNavbar>
   );
 }
