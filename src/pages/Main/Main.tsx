@@ -5,8 +5,9 @@ import * as styles from "./Main.module.css";
 import { Button, Container, Modal } from "react-bootstrap";
 import { storage, db } from "../../utils/fbInit";
 import { MainProps } from "./MainType";
-import useStorageList from "../../hooks/useStorageLsit";
-import { result } from "lodash";
+import useStorageList from "../../hooks/useStorageList";
+import { saveAs } from "file-saver";
+import { SaveAltSharp } from "@material-ui/icons";
 
 function Main({ user }: MainProps) {
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -15,32 +16,39 @@ function Main({ user }: MainProps) {
   const [refresh, setRefresh] = useState({});
   const storageRef = storage.ref(`${user.uid}`);
 
+  const { result: fileList, loading } = useStorageList(user.uid, refresh);
+
   const onSubmit = () => {
     const filename = pathToFile.split("\\").pop();
-    console.log(filename);
     const fileRef = storageRef.child(`${filename}`);
-    if (file) fileRef.put(file);
+    if (file) {
+      fileRef.put(file).then((result) => {
+        console.log(result.metadata.fullPath);
+        try {
+          db.collection("files").add({
+            filename: filename,
+            userId: user.uid,
+            date: result.metadata.timeCreated,
+            size: result.metadata.size,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    }
     setRefresh({});
     setShowUploadModal(false);
   };
 
-  const { result: fileList, loading } = useStorageList(user.uid, refresh);
   const downloadFile = async (filename: string) => {
     const fileRef = storageRef.child(filename);
-    const downloadURL = await fileRef.getDownloadURL();
-    const token = user.getIdToken();
-    try {
-      const result = await fetch(downloadURL, {
-        method: "GET",
-        headers: new Headers({
-          Authorization: "Bearer" + token,
-        }),
-      });
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
+
+    const downloadUrl = await fileRef.getDownloadURL();
+    const result = await fetch(downloadUrl, { method: "GET" });
+    const blob = await result.blob();
+    saveAs(blob, fileRef.name);
   };
+  console.log(fileList);
   return (
     <div>
       <Navbar />
@@ -55,8 +63,8 @@ function Main({ user }: MainProps) {
           ? null
           : fileList.map((file) => (
               <div>
-                <h1>{file.name}</h1>
-                <Button onClick={() => downloadFile(file.name)}>
+                <h1>{file.filename}</h1>
+                <Button onClick={() => downloadFile(file.filename)}>
                   Download
                 </Button>
               </div>

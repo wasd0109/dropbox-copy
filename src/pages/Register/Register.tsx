@@ -49,6 +49,7 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className={styles.inputLabel}>Email address</Form.Label>
           <Form.Control
+            className={styles.input}
             size="lg"
             required
             type="email"
@@ -64,6 +65,7 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label className={styles.inputLabel}>Password</Form.Label>
           <Form.Control
+            className={styles.input}
             size="lg"
             type="password"
             onChange={(e) => setField("password", e.target.value)}

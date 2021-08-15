@@ -57,6 +57,7 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className={styles.inputLabel}>Email address</Form.Label>
           <Form.Control
+            className={styles.input}
             required
             type="email"
             onChange={(e) => setField("email", e.target.value)}
@@ -71,6 +72,7 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label className={styles.inputLabel}>Password</Form.Label>
           <Form.Control
+            className={styles.input}
             type="password"
             onChange={(e) => setField("password", e.target.value)}
             placeholder="Password"

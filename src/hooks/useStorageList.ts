@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { storage } from "../utils/fbInit";
+import { db, storage } from "../utils/fbInit";
 
 type File = {
-  name: string;
+  filename: string;
+  userId: string;
+  size: number;
+  date: string;
 };
 
 const useStorageList = (uid: string, refresh: {}) => {
@@ -10,15 +13,16 @@ const useStorageList = (uid: string, refresh: {}) => {
   let [loading, setLoading] = useState(true);
   useEffect(() => {
     const getItemLists = async () => {
-      const storageRef = storage.ref(uid);
-      let tempArray = [] as any;
-      const lists = await storageRef.listAll();
-      await lists.items.forEach(async (itemRef) =>
-        tempArray.push({
-          name: itemRef.name,
-        })
-      );
-      setResult(tempArray);
+      const temp = [] as File[];
+      const result = await db
+        .collection("files")
+        .where("userId", "==", uid)
+        .get();
+      result.docs.forEach((doc) => {
+        const data = doc.data() as File;
+        temp.push(data);
+      });
+      setResult(temp);
     };
     getItemLists();
     setLoading(false);
