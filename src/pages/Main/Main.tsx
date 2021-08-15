@@ -49,6 +49,12 @@ function Main({ user }: MainProps) {
     setFile(null);
   };
 
+  const handleHidePrompt = () => {
+    setShowUploadModal(false);
+    setPathToFile("");
+    setFile(null);
+  };
+
   return (
     <div>
       <Navbar />
@@ -61,11 +67,7 @@ function Main({ user }: MainProps) {
         </div>
         {loading ? null : <FileList fileList={result} uid={user.uid} />}
       </Container>
-      <Modal
-        show={showUploadModal}
-        centered
-        onHide={() => setShowUploadModal(false)}
-      >
+      <Modal show={showUploadModal} centered onHide={() => handleHidePrompt()}>
         <Modal.Header closeButton>
           <Modal.Title>Upload a file</Modal.Title>
         </Modal.Header>

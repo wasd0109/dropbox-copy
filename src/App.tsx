@@ -14,7 +14,6 @@ function App() {
   const [showUserNameModal, setShowUserNameModal] = useState(false);
   const [loading, setLoading] = useState(true);
   auth.onAuthStateChanged((user) => {
-    console.log(user?.displayName);
     if (user === null) {
       setUser(null);
     } else if (user.displayName === null) {

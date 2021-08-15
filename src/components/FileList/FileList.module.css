@@ -1,0 +1,14 @@
+.container {
+}
+.sortBar {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.sortBar > div > p {
+  margin-bottom: 0;
+}
+
+.sortBarItem:hover {
+  background-color: antiquewhite;
+}

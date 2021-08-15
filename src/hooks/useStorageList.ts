@@ -22,7 +22,6 @@ const useStorageList = () => {
           const data = doc.data() as File;
           temp.push(data);
         });
-        console.log(temp);
         setResult(temp);
       });
 

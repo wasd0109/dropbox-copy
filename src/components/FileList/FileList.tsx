@@ -1,45 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { File } from "../../hooks/useStorageList";
-import { Button } from "react-bootstrap";
-import { storage, db } from "../../utils/fbInit";
-import { saveAs } from "file-saver";
+
+import { ListGroup } from "react-bootstrap";
+import styles from "./FileList.module.css";
+import FileListItem from "../FileListItem";
+
+const sortByAscending = (a: string | number, b: string | number) => {
+  if (a < b) {
+    return -1;
+  }
+  if (a > b) {
+    return 1;
+  }
+  return 0;
+};
+
+const sortByDescending = (a: string | number, b: string | number) => {
+  if (a < b) {
+    return 1;
+  }
+  if (a > b) {
+    return -1;
+  }
+  return 0;
+};
+
+const sorting = (sortingBy: SortingState, fileList: File[]) => {
+  const { field, ascending } = sortingBy;
+  switch (field) {
+    case "name":
+      return fileList.sort((a, b) => {
+        let fa = a.filename.toLowerCase();
+        let fb = b.filename.toLowerCase();
+        if (ascending) return sortByAscending(fa, fb);
+        else return sortByDescending(fa, fb);
+      });
+    case "size":
+      return fileList.sort((a, b) => {
+        const fa = a.size;
+        const fb = b.size;
+        if (ascending) return sortByAscending(fa, fb);
+        else return sortByDescending(fa, fb);
+      });
+    default:
+      return fileList;
+  }
+};
 
 type FileListProps = {
   fileList: File[];
   uid: string;
 };
 
-function FileList({ fileList, uid }: FileListProps) {
-  const storageRef = storage.ref(`${uid}`);
-  const downloadFile = async (filename: string) => {
-    const fileRef = storageRef.child(filename);
-    const downloadUrl = await fileRef.getDownloadURL();
-    const result = await fetch(downloadUrl, { method: "GET" });
-    const blob = await result.blob();
-    saveAs(blob, fileRef.name);
-  };
+type Field = "name" | "date" | "size";
 
-  const deleteFile = (filename: string) => {
-    const fileRef = storageRef.child(filename);
-    fileRef.getMetadata().then(({ customMetadata: { fileId } }) => {
-      fileRef.delete().then(() => {
-        db.collection("files").doc(fileId).delete();
-      });
-    });
-  };
+type SortingState = {
+  field: Field;
+  ascending: boolean;
+};
+
+function FileList({ fileList, uid }: FileListProps) {
+  const [sortedList, setSortedList] = useState<File[]>([]);
+  const [sortingBy, setSortingBy] = useState<SortingState>({
+    field: "name",
+    ascending: true,
+  });
+
+  useEffect(() => {
+    setSortedList(sorting(sortingBy, fileList));
+  }, [sortingBy, fileList]);
+  console.log(sortedList);
   return (
-    <div>
-      {fileList.map((file) => (
-        <div>
-          <h1>{file.filename}</h1>
-          <p>{(file.size / 1000000).toFixed(2)}MB</p>
-          <p>{file.date}</p>
-          <Button onClick={() => downloadFile(file.filename)}>Download</Button>
-          <Button variant="danger" onClick={() => deleteFile(file.filename)}>
-            Delete
-          </Button>
-        </div>
-      ))}
+    <div className={styles.container}>
+      <ListGroup>
+        <ListGroup.Item className={styles.sortBar}>
+          <div>
+            <p>Name</p>
+          </div>
+          <div>
+            <p>Size</p>
+          </div>
+          <div>
+            <p>Created at</p>
+          </div>
+        </ListGroup.Item>
+        {sortedList.map((file) => (
+          <FileListItem {...file} />
+        ))}
+      </ListGroup>
     </div>
   );
 }
