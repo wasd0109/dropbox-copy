@@ -25,9 +25,22 @@ function FileListItem({ filename, size, date }: FileListItemProps) {
   const downloadFile = async (filename: string) => {
     const fileRef = storageRef.child(filename);
     const downloadUrl = await fileRef.getDownloadURL();
-    const result = await fetch(downloadUrl, { method: "GET" });
-    const blob = await result.blob();
-    saveAs(blob, fileRef.name);
+    saveAs(downloadUrl, fileRef.name);
+    try {
+      const result = await fetch(downloadUrl, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Access-Control-Allow-Origin":
+            "https://firebasestorage.googleapis.com/",
+        },
+      });
+      console.log(result);
+      const blob = await result.blob();
+      saveAs(blob, fileRef.name);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const deleteFile = (filename: string) => {
@@ -45,7 +58,6 @@ function FileListItem({ filename, size, date }: FileListItemProps) {
       <Moment format="L HH:MM">{date}</Moment>
       <div className={styles.buttons}>
         <Button onClick={() => downloadFile(filename)}>Download</Button>
-
         <DropdownButton
           title="More"
           variant="secondary"

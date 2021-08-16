@@ -69,7 +69,6 @@ function FileList({ fileList, uid }: FileListProps) {
   useEffect(() => {
     setSortedList(sorting(sortingBy, fileList));
   }, [sortingBy, fileList]);
-  console.log(sortedList);
   return (
     <div className={styles.container}>
       <ListGroup>
@@ -91,7 +90,7 @@ function FileList({ fileList, uid }: FileListProps) {
           </div>
         </ListGroup.Item>
         {sortedList.map((file) => (
-          <FileListItem {...file} />
+          <FileListItem {...file} key={file.filename} />
         ))}
       </ListGroup>
     </div>
