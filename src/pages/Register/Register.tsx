@@ -1,126 +1,113 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { RegisterFormData } from "./RegisterType";
-import ErrorBar from "../../components/ErrorBar";
-import ReactLoading from "react-loading";
-import emailRegex from "../../components/validators/isEmail";
+import { Form, Alert, Button, Spinner } from "react-bootstrap";
+import { RegisterFormData, RegisterFormError } from "./RegisterType";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/fbInit";
+import * as styles from "./Register.module.css";
+import findRegisterFormErrors from "./helper";
+
+const INITIAL_FORM_STATE = { agreeTerm: false } as RegisterFormData;
 
 function Register() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterFormData>();
-
+  const [form, setForm] = useState(INITIAL_FORM_STATE);
   const [loading, setLoading] = useState(false);
-  const [registerError, setRegisterError] = useState("");
+  const [errors, setErrors] = useState({} as RegisterFormError);
 
-  const onSubmit = async (data: RegisterFormData) => {
-    setLoading(true);
-    setRegisterError("");
-    const { email, password } = data;
+  const setField = (field: string, value: string | boolean) => {
+    setForm({
+      ...form,
+      [field]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    setErrors({} as RegisterFormError);
+    const newErrors = findRegisterFormErrors(form);
+    if (Object.keys(newErrors).length > 0) {
+      // We got errors!
+      return setErrors(newErrors);
+    }
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      await auth.createUserWithEmailAndPassword(form.email, form.password);
     } catch (err) {
-      const authError = err as firebase.default.auth.Error;
       setLoading(false);
-      setRegisterError(authError.message);
+      const authError = err as firebase.default.auth.Error;
+      const ambiguousError =
+        authError.code === "auth/email-already-in-use"
+          ? "Email already in use"
+          : "";
+      setErrors({
+        ...errors,
+        server: ambiguousError || "Something went wrong",
+      });
     }
   };
 
   return (
-    <div className="grid h-screen auto-rows-auto grid-cols-1 gap-x-2">
-      <form
-        className="row-start-2 row-end-4 col-span-full flex flex-col shadow-md items-stretch py-4 px-4 mx-2 "
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label className="flex flex-col">
-          Email
-          <input
+    <div className={styles.container}>
+      <Form className={styles.form}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className={styles.inputLabel}>Email address</Form.Label>
+          <Form.Control
+            className={styles.input}
+            size="lg"
+            required
             type="email"
-            className="border-2 mt-1"
-            {...register("email", {
-              required: "Required",
-              pattern: {
-                value: emailRegex,
-                message: "Please enter a valid email",
-              },
-            })}
+            onChange={(e) => setField("email", e.target.value)}
+            placeholder="Enter email"
+            isInvalid={!!errors.email}
           />
-        </label>
-        {errors.email?.message && (
-          <div className="mt-2">
-            <ErrorBar message={errors.email.message} />
-          </div>
-        )}
+          <Form.Control.Feedback type="invalid">
+            {errors.email}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-        <label className="flex flex-col mt-4">
-          Password
-          <input
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label className={styles.inputLabel}>Password</Form.Label>
+          <Form.Control
+            className={styles.input}
+            size="lg"
             type="password"
-            className="border-2 mt-1"
-            {...register("password", {
-              required: "Required",
-              minLength: {
-                value: 6,
-                message: "Password must be longer than 6 characters",
-              },
-            })}
+            onChange={(e) => setField("password", e.target.value)}
+            placeholder="Password"
+            isInvalid={!!errors.password}
           />
-        </label>
-        {errors.password?.message && (
-          <div className="mt-2">
-            <ErrorBar message={errors.password.message} />
-          </div>
-        )}
-
-        <label className="flex mt-4">
-          <input
-            className="border-2 mt-1 mr-1"
+          <Form.Control.Feedback type="invalid">
+            {errors.password}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group
+          className="mb-3"
+          controlId="formBasicCheckbox"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <Form.Check
             type="checkbox"
-            {...register("agreeTerm", {
-              required: "Please agree Term of Services",
-            })}
+            className={styles.checkbox}
+            onClick={() => setField("agreeTerm", !form.agreeTerm)}
+            isInvalid={!!errors.agreeTerm}
           />
-          <p>Agree to Term of Services</p>
-        </label>
-        {errors.agreeTerm?.message && (
-          <div className="mt-2">
-            <ErrorBar message={errors.agreeTerm.message} />
-          </div>
-        )}
-
-        <div className="flex justify-center flex-col mt-4">
-          {loading ? (
-            <ReactLoading
-              type="spin"
-              color="#4299e1"
-              className="self-center"
-              width="2rem"
-              height="2rem"
-            />
-          ) : (
-            <input
-              type="submit"
-              aria-label="Register"
-              value="Register"
-              className="bg-blue-500 hover:bg-blue-700 cursor-pointer  text-white text-xl font-bold py-2 px-4 rounded self-center"
-            />
-          )}
-          <Link
-            to="/login"
-            aria-label="To Login Page"
-            className="self-end text-blue-500 hover:text-blue-700 cursor-pointer text-xl font-bold mt-2 mr-4"
-          >
-            Login
-          </Link>
+          <Form.Label className={styles.checkboxLabel}>
+            Agree Term of Services
+          </Form.Label>
+          <Form.Control.Feedback type="invalid">
+            {errors.agreeTerm}
+          </Form.Control.Feedback>
+        </Form.Group>
+        {errors.server ? (
+          <Alert variant="danger" className={styles.error}>
+            {errors.server}
+          </Alert>
+        ) : null}
+        <div className={styles.buttons}>
+          <Button variant="primary" onClick={handleSubmit}>
+            {loading ? <Spinner animation="border" /> : "Register"}
+          </Button>
+          <Button variant="link">
+            <Link to="/">Login</Link>
+          </Button>
         </div>
-        <div className=" self-center mt-2">
-          {registerError ? <ErrorBar message={registerError} /> : null}
-        </div>
-      </form>
+      </Form>
     </div>
   );
 }

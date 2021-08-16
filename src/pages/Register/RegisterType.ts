@@ -3,3 +3,10 @@ export type RegisterFormData = {
   password: string;
   agreeTerm: boolean;
 };
+
+export type RegisterFormError = {
+  email: string;
+  password: string;
+  agreeTerm: string;
+  server: string;
+};

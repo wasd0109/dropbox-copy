@@ -1,0 +1,27 @@
+.item {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  padding: 1rem 0;
+}
+.item > * {
+  grid-column: span 1 !important;
+  width: auto;
+  margin-bottom: 0;
+}
+
+.item:hover {
+  background-color: rgba(13, 110, 253, 0.7);
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dropdownBtn {
+  display: flex;
+  align-items: center;
+}
