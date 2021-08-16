@@ -1,8 +1,9 @@
 import React from "react";
 import Moment from "react-moment";
-import { Button, ListGroup } from "react-bootstrap";
+import { Button, ListGroup, Dropdown, DropdownButton } from "react-bootstrap";
 import { auth, storage, db } from "../../utils/fbInit";
 import { saveAs } from "file-saver";
+import { FiMoreHorizontal } from "react-icons/fi";
 import * as styles from "./FileListItem.module.css";
 
 type FileListItemProps = {
@@ -45,9 +46,16 @@ function FileListItem({ filename, size, date }: FileListItemProps) {
       <Moment format="L HH:MM">{date}</Moment>
       <div className={styles.buttons}>
         <Button onClick={() => downloadFile(filename)}>Download</Button>
-        <Button variant="danger" onClick={() => deleteFile(filename)}>
-          Delete
-        </Button>
+
+        <DropdownButton
+          title="More"
+          variant="secondary"
+          className={styles.dropdownBtn}
+        >
+          <Dropdown.Item as="div" onClick={() => deleteFile(filename)}>
+            Delete
+          </Dropdown.Item>
+        </DropdownButton>
       </div>
     </ListGroup.Item>
   );

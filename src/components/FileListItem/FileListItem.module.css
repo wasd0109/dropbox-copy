@@ -17,6 +17,11 @@
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dropdownBtn {
+  display: flex;
   align-items: center;
 }
