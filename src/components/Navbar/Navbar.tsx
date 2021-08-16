@@ -1,12 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { auth } from "../../utils/fbInit";
 import { Link } from "react-router-dom";
-import {
-  Navbar as BootstrapNavbar,
-  Container,
-  Nav,
-  Button,
-} from "react-bootstrap";
+import { Navbar as BootstrapNavbar, Nav } from "react-bootstrap";
 import * as styles from "./Navbar.module.css";
 
 function Navbar() {

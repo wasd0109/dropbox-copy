@@ -75,7 +75,13 @@ function FileList({ fileList, uid }: FileListProps) {
       <ListGroup>
         <ListGroup.Item className={styles.sortBar}>
           <div>
-            <p>Name</p>
+            <p
+              onClick={() =>
+                setSortingBy({ field: "name", ascending: !sortingBy.ascending })
+              }
+            >
+              Name
+            </p>
           </div>
           <div>
             <p>Size</p>

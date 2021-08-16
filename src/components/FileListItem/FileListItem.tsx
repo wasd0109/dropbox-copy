@@ -3,7 +3,6 @@ import Moment from "react-moment";
 import { Button, ListGroup, Dropdown, DropdownButton } from "react-bootstrap";
 import { auth, storage, db } from "../../utils/fbInit";
 import { saveAs } from "file-saver";
-import { FiMoreHorizontal } from "react-icons/fi";
 import * as styles from "./FileListItem.module.css";
 
 type FileListItemProps = {

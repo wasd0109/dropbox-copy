@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db, storage, auth } from "../utils/fbInit";
+import { db, auth } from "../utils/fbInit";
 
 export type File = {
   filename: string;
